@@ -15,7 +15,7 @@ client.connect();
 
 const http = require('http');
 const server = http.createServer((req, res) => {
-  if(req.url === '/'){
+  if(req.url === '/' || req.url === '/problems/' || req.url === '/problems'){
     res.writeHead(200, {'Content-Type': 'text/html'});
     const html = fs.readFileSync(__dirname + '/views/index.html', 'utf8');
     if(html){
@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  else if (req.url === '/question-1' && req.method === 'GET') {
+  else if ((req.url === '/question-1' || req.url === '/problems/question-1') && req.method === 'GET') {
     const html = fs.readFileSync(__dirname + '/views/question-1.ejs', 'utf8');
     res.writeHead(200, {'Content-Type': 'text/html'});
     if(html){
@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  else if (req.url === '/login' && req.method === 'POST') {
+  else if ((req.url === '/login' || req.url === '/problems/login') && req.method === 'GET') {
     let body = '';
     req.on('data', chunk => {
       body += chunk.toString();
@@ -72,7 +72,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(404, {'Content-Type': 'text/html'});
     res.write('Page not found');
     res.write('<br>');
-    res.write('Try /login');
+    res.write('Try /problems/login');
     res.end();
   }
 });
