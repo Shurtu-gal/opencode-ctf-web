@@ -1,0 +1,4 @@
+# Gitignore
+
+node_modules
+dist

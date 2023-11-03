@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find the Treasure</title>
+</head>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    color: white;
+    background-color: rgb(236, 152, 42);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: clamp(0px, 80%, 300px);
+  }
+
+  input {
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    width: 75%;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(42, 184, 236);
+  }
+</style>
+
+<body class="container">
+  <div class="welcome">
+    <h1>Welcome to Find the Treasure</h1>
+    <h3>Please login to continue</h3>
+  </div>
+
+  <form action="/login" method="post">
+    <input type="text" name="username" placeholder="Enter your username">
+    <input type="password" name="password" placeholder="Enter your password">
+    <input type="submit" value="Login">
+  </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+version: "3"
+services:
+  db:
+    image: postgres:12
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      timeout: 45s
+      interval: 10s
+      retries: 10
+  
+  migrate:
+    build: 
+      context: .
+    command: npm run db:init
+    working_dir: /usr/src/app
+    environment:
+      DB_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  server:
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT}
+      DB_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    expose:
+      - ${PORT}
+    depends_on:
+      - migrate
+
+volumes:
+  postgres: ~

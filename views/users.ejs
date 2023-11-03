@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users information</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    background-color: rgba(177, 116, 36, 0.5);
+    flex-grow: 1;
+    min-height: 100%;
+  }
+
+  .outline {
+    /* Outline text */
+    text-shadow: 0 0 3px #009879;
+    color: white;
+  }
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(151, 100, 34);
+  }
+
+  table {
+    width: clamp(0px, 80%, 500px);
+    margin: 25px 0;
+    border-spacing: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-bottom: 5px solid #009879;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  /* Border radius */
+  table thead tr:first-child th:first-child {
+    border-top-left-radius: 20px;
+  }
+
+  table thead tr:first-child th:last-child {
+    border-top-right-radius: 20px;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+  }
+
+  tr {
+    color: #0E0E0E;
+  }
+
+  th {
+    background-color: #009879;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2b6;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<body>
+  <nav class="nav-bar">
+    <a href="/">Back to home</a>
+    <h3>Logged in as <%= username %></h3>
+  </nav>
+  <main class="container">
+    <h1 class="outline" >Users information</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Flag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.flag %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
