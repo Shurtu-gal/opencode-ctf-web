@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  else if ((req.url === '/login' || req.url === '/problems/login') && req.method === 'GET') {
+  else if ((req.url === '/login' || req.url.includes('/problems/login')) && req.method === 'GET') {
     let body = '';
     req.on('data', chunk => {
       body += chunk.toString();
