@@ -20,8 +20,11 @@ const server = http.createServer((req, res) => {
     const html = fs.readFileSync(__dirname + '/views/index.html', 'utf8');
     if(html){
       res.write(html);
+      res.end();
     } else{
       res.write('No file found');
+      res.end();
+
     }
   }
 
@@ -31,8 +34,10 @@ const server = http.createServer((req, res) => {
     if(html){
       const rendered = ejs.render(html, {title: 'Question 1', flag: 'flag{50m3t!m35_w3_n33d_2_g3t_!ns!de}'});
       res.write(rendered);
+      res.end();
     } else{
       res.write('No file found');
+      res.end();
     }
   }
 
